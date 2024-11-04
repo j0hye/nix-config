@@ -2,7 +2,7 @@
   inputs,
   outputs,
   nixpkgs,
-  # overlays,
+  overlays,
 }: {
   user,
   hostname,
@@ -11,27 +11,14 @@
 }: let
   inherit is_wsl;
 
-  # pkgs = import nixpkgs {
-  #   inherit system overlays;
-  #   config.allowUnfree = true;
-  # };
-  pkgs = import nixpkgs {
-    inherit system;
-    overlays = [
-      inputs.nno.overlays.default
-    ];
-    config = {
-      allowUnfree = true;
-    };
-  };
-
   host_configuration = ./. + "/../hosts/${hostname}/configuration.nix";
   user_configuration = ./. + "/../home/${user}/home.nix";
 
-  nixosConfiguration = inputs.nixpkgs.lib.nixosSystem {
+  nixosConfiguration = nixpkgs.lib.nixosSystem {
     inherit system;
     modules = [
-      {nixpkgs.pkgs = pkgs;}
+      {nixpkgs.overlays = overlays;}
+      {nixpkgs.config.allowUnfree = true;}
       (
         if is_wsl
         then inputs.nixos-wsl.nixosModules.wsl

@@ -2,8 +2,8 @@
   description = "NixOS Configuration";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-23.11";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    # nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-23.11";
 
     # Home-manager
     home-manager.url = "github:nix-community/home-manager";
@@ -14,7 +14,7 @@
     nixos-wsl.inputs.nixpkgs.follows = "nixpkgs";
 
     # Neovim nightly overlay
-    nno.url = "github:nix-community/neovim-nightly-overlay";
+    nno.url = "github:nix-community/neovim-nightly-overlay/flake-update";
     nno.inputs.nixpkgs.follows = "nixpkgs";
 
     # Dotfiles
@@ -24,14 +24,17 @@
   outputs = {
     self,
     nixpkgs,
+    nno,
     ...
   } @ inputs: let
     inherit (self) outputs;
-    # overlays = [
-    #   inputs.nno.overlays.default
-    # ];
+
+    overlays = [
+      nno.overlays.default
+    ];
+
     mkSystem = import ./lib/mkSystem.nix {
-      inherit inputs outputs nixpkgs;
+      inherit inputs outputs nixpkgs overlays;
     };
   in
     mkSystem {
