@@ -17,9 +17,9 @@
     nno.url = "github:nix-community/neovim-nightly-overlay";
     nno.inputs.nixpkgs.follows = "nixpkgs";
 
-    # # Dotfiles
-    # dotfiles.url = "";
-    # dotfiles.flake = false;
+    # Dotfiles
+    dotfiles.url = "github:j0hye/dotfiles";
+    dotfiles.flake = false;
   };
   outputs = {
     self,
