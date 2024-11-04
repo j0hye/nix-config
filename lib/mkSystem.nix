@@ -11,9 +11,18 @@
 }: let
   inherit is_wsl;
 
+  # pkgs = import nixpkgs {
+  #   inherit system overlays;
+  #   config.allowUnfree = true;
+  # };
   pkgs = import nixpkgs {
-    inherit system overlays;
-    config.allowUnfree = true;
+    inherit system;
+    overlays = [
+      inputs.nno.overlays.default
+    ];
+    config = {
+      allowUnfree = true;
+    };
   };
 
   host_configuration = ./. + "/../hosts/${hostname}/configuration.nix";

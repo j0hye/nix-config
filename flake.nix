@@ -27,11 +27,11 @@
     ...
   } @ inputs: let
     inherit (self) outputs;
-    overlays = [
-      inputs.nno.overlays.default
-    ];
+    # overlays = [
+    #   inputs.nno.overlays.default
+    # ];
     mkSystem = import ./lib/mkSystem.nix {
-      inherit inputs outputs nixpkgs overlays;
+      inherit inputs outputs nixpkgs;
     };
   in
     mkSystem {
