@@ -1,7 +1,7 @@
 {
   programs.starship = {
     enable = true;
-    enableZshintegration = true;
+    enableZshIntegration = true;
     # settings = {
     #   nix_shell = {
     #     format = "via [$symbol(\($name\))]($style) ";
