@@ -30,4 +30,8 @@
     withPython3 = false;
     withRuby = false;
   };
+  home.file.".config/nvim" = {
+    source = "${inputs.dotfiles}/nvim";
+    recursive = true;
+  };
 }
