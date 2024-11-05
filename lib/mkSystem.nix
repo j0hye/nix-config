@@ -17,6 +17,7 @@
 
   nixosConfiguration = nixpkgs.lib.nixosSystem {
     inherit system;
+    specialArgs = {inherit inputs outputs user hostname system;};
     modules = [
       {nixpkgs.overlays = overlays;}
       {nixpkgs.config.allowUnfree = true;}
@@ -27,18 +28,28 @@
       )
       host_configuration
       common_configuration
-      inputs.home-manager.nixosModules.home-manager
+      inputs.home-manager.nixosModules.default
+    ];
+  };
+
+  homeConfiguration = inputs.home-manager.lib.homeManagerConfiguration {
+    pkgs = nixpkgs.legacyPackages.${system};
+    extraSpecialArgs = {inherit inputs outputs user hostname system;};
+    modules = [
+      user_configuration
       {
-        home-manager.useGlobalPkgs = true;
-        home-manager.useUserPackages = true;
-        home-manager.users.${user} = import user_configuration;
-        home-manager.extraSpecialArgs = {inherit inputs outputs user hostname system;};
+        home = {
+          useGlobalPkgs = true;
+          useUserPackages = true;
+        };
       }
     ];
-    specialArgs = {inherit inputs outputs user hostname system;};
   };
 in {
   nixosConfigurations = {
     ${hostname} = nixosConfiguration;
+  };
+  homeConfigurations = {
+    ${user} = homeConfiguration;
   };
 }

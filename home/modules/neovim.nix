@@ -16,11 +16,11 @@
       lua-language-server
       stylua
     ];
-    extraLuaPackages = p:
-      with p; [
-        luautf8
-        pathlib-nvim
-      ];
+    # extraLuaPackages = p:
+    #   with p; [
+    #     luautf8
+    #     pathlib-nvim
+    #   ];
     # Aliases
     viAlias = true;
     vimAlias = true;
