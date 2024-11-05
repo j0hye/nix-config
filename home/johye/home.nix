@@ -30,6 +30,8 @@
     tree
     zoxide
     htop
+    # nix
+    nh
   ];
 
   # Session variables
@@ -37,6 +39,7 @@
     LANG = "sv_SE.UTF-8";
     LC_ALL = "sv_SE.UTF-8";
     EDITOR = "nvim";
+    FLAKE = "/home/${user}/.config/nix-config";
   };
 
   # Let Home Manager install and manage itself.
