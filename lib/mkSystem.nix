@@ -11,7 +11,7 @@
 }: let
   inherit is_wsl;
 
-  common_configuration = ./. + "../modules/common.nix";
+  common_configuration = ./. + "/../modules/common.nix";
   host_configuration = ./. + "/../hosts/${hostname}/configuration.nix";
   user_configuration = ./. + "/../home/${user}/home.nix";
 
