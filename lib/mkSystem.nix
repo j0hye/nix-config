@@ -21,6 +21,7 @@
     modules = [
       {nixpkgs.overlays = overlays;}
       {nixpkgs.config.allowUnfree = true;}
+      inputs.home-manager.nixosModules.default
       (
         if is_wsl
         then inputs.nixos-wsl.nixosModules.wsl
@@ -28,21 +29,14 @@
       )
       host_configuration
       common_configuration
-      inputs.home-manager.nixosModules.default
     ];
   };
 
   homeConfiguration = inputs.home-manager.lib.homeManagerConfiguration {
-    pkgs = nixpkgs.legacyPackages.${system};
+    pkgs = import nixpkgs {inherit system overlays;};
     extraSpecialArgs = {inherit inputs outputs user hostname system;};
     modules = [
       user_configuration
-      {
-        home = {
-          useGlobalPkgs = true;
-          useUserPackages = true;
-        };
-      }
     ];
   };
 in {
