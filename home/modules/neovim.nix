@@ -6,7 +6,7 @@
   programs.neovim = {
     enable = true;
     package = pkgs.neovim;
-    extraPackage = with pkgs; [
+    extraPackages = with pkgs; [
       lua5_1
       luarocks
       # Nix
