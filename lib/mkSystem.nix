@@ -11,6 +11,7 @@
 }: let
   inherit is_wsl;
 
+  common_configuration = ./. + "../modules/common.nix";
   host_configuration = ./. + "/../hosts/${hostname}/configuration.nix";
   user_configuration = ./. + "/../home/${user}/home.nix";
 
@@ -25,6 +26,7 @@
         else {}
       )
       host_configuration
+      common_configuration
       inputs.home-manager.nixosModules.home-manager
       {
         home-manager.useGlobalPkgs = true;

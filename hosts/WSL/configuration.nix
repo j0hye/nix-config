@@ -10,25 +10,10 @@
   wsl.wslConf.network.hostname = hostname;
   wsl.wslConf.interop.appendWindowsPath = false;
 
-  nix.extraOptions = ''
-    experimental-features = nix-command flakes
-    keep-outputs = true
-    keep-derivations = true
-  '';
-
-  nix.gc = {
-    automatic = true;
-    options = "--delete-older-than 7d";
-  };
-
   environment.systemPackages = with pkgs; [
-    vim
-    git
     xclip
+    wslu
   ];
-
-  programs.zsh.enable = true;
-  users.defaultUserShell = pkgs.zsh;
 
   system.stateVersion = "24.05";
 }

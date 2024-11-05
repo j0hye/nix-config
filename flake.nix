@@ -14,6 +14,7 @@
     nixos-wsl.inputs.nixpkgs.follows = "nixpkgs";
 
     # Neovim nightly overlay
+    # https://github.com/nix-community/neovim-nightly-overlay/tree/flake-update
     nno.url = "github:nix-community/neovim-nightly-overlay/flake-update";
     nno.inputs.nixpkgs.follows = "nixpkgs";
 

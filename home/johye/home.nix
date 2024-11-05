@@ -7,29 +7,35 @@
   home.homeDirectory = "/home/${user}";
   home.stateVersion = "24.05";
 
-  programs.neovim = {
-    enable = true;
-    package = pkgs.neovim;
-  };
-
-  home.packages = [
-    # nix lsp and formatter
-    pkgs.nixd
-    pkgs.alejandra
-    # lua lsp and formatter
-    pkgs.lua-language-server
-    pkgs.stylua
+  imports = [
+    ../modules/neovim.nix
+    ../modules/zsh.nix
+    ../modules/starship.nix
   ];
 
-  programs.zsh = {
-    enable = true;
-    enableCompletion = true;
-    autosuggestion.enable = true;
-    syntaxHighlighting.enable = true;
-  };
+  home.packages = with pkgs; [
+    # build
+    gcc
+    gnumake
+    cargo
+    # util
+    wget
+    curl
+    unzip
+    fd
+    ripgrep
+    bat
+    eza
+    fzf
+    tree
+    zoxide
+    htop
+  ];
 
-  # Default editor
+  # Session variables
   home.sessionVariables = {
+    LANG = "sv_SE.UTF-8";
+    LC_ALL = "sv_SE.UTF-8";
     EDITOR = "nvim";
   };
 
