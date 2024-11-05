@@ -15,7 +15,7 @@
 
     # Neovim nightly overlay
     # https://github.com/nix-community/neovim-nightly-overlay/tree/flake-update
-    nno.url = "github:nix-community/neovim-nightly-overlay/flake-update";
+    nno.url = "github:nix-community/neovim-nightly-overlay";
     nno.inputs.nixpkgs.follows = "nixpkgs";
 
     # Dotfiles
