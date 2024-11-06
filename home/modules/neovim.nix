@@ -35,13 +35,15 @@
     withRuby = false;
   };
 
-  home.file = {
-    ".config/nvim/init.lua" = {
+  xdg.configFile = {
+    "nvim/init.lua" = {
       source = "${inputs.dotfiles}/nvim/init.lua";
+      force = true;
     };
-    ".config/nvim/lua" = {
+    "nvim/lua" = {
       source = "${inputs.dotfiles}/nvim/lua";
       recursive = true;
+      force = true;
     };
   };
 }
